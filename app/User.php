@@ -10,6 +10,12 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $table = 'admin';
+
+  /*   public function getAuthPassword()
+    {
+        return $this->pwd;
+    } */
     /**
      * The attributes that are mass assignable.
      *

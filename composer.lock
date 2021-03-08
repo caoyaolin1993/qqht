@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3d88fa6639c9463d85260309c03bb68",
+    "content-hash": "b12a4cee45510c68f6f2642e60c8f9e1",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -614,6 +614,53 @@
                 }
             ],
             "time": "2020-10-22T13:57:20+00:00"
+        },
+        {
+            "name": "guojikai/captcha-image-creator",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guojikai/captcha-image-creator.git",
+                "reference": "97d9047b2948feedf5a02bd56a56462c6a6bd094"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guojikai/captcha-image-creator/zipball/97d9047b2948feedf5a02bd56a56462c6a6bd094",
+                "reference": "97d9047b2948feedf5a02bd56a56462c6a6bd094",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Pcic\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "guojikai",
+                    "email": "guojikai@gmail.com"
+                }
+            ],
+            "description": "A captcha image creator,written by PHP. 一个PHP写的支持的中文的验证码图片生成工具，仅生成验证码图片不进行缓存，需二次封装使用。",
+            "homepage": "https://github.com/guojikai/captcha-image-creator",
+            "keywords": [
+                "Chinese",
+                "captcha"
+            ],
+            "time": "2016-01-20T05:21:16+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
