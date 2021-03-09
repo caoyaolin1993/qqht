@@ -13,25 +13,26 @@
 <body>
     <form class="layui-form" action="" style="margin-top: 40px;" lay-filter="aaaa">
         @csrf
+        <input type="hidden" name="aid" value="{{$item['id']}}">
         <div class="layui-form-item"><label class="layui-form-label">用户名</label>
-            <div class="layui-input-inline" style="width: 600px;"><input  type="text" name="username" required lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input"></div>
+            <div class="layui-input-inline" style="width: 600px;"><input readonly value="{{$item['username']}}" type="text" name="username" required lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input"></div>
         </div>
         <div class="layui-form-item"><label class="layui-form-label">密码</label>
             <div class="layui-input-inline" style="width: 600px;"><input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input"></div>
         </div>
         <div class="layui-form-item"><label class="layui-form-label">真实姓名</label>
-            <div class="layui-input-inline" style="width: 600px;"><input  type="text" name="realname" required lay-verify="required" placeholder="请输入真实姓名" autocomplete="off" class="layui-input"></div>
+            <div class="layui-input-inline" style="width: 600px;"><input value="{{$item['realname']}}" type="text" name="realname" required lay-verify="required" placeholder="请输入真实姓名" autocomplete="off" class="layui-input"></div>
         </div>
         <div class="layui-form-item"><label class="layui-form-label">角色</label>
             <div class="layui-input-inline" style="width: 600px;"><select name="gid" lay-verify="required">
                     @foreach($groups as $group)
-                    <option value="{{$group['id']}}">{{$group['title']}}</option>
+                    <option {{$item['gid']==$group['id']?'selected':'' }} value="{{$group['id']}}">{{$group['title']}}</option>
                     @endforeach
                 </select></div>
         </div>
         <div class="layui-form-item"><label class="layui-form-label">状态</label>
             <div class="layui-input-inline" style="width: 600px;">
-                <input type="checkbox" name="status" title="禁用" lay-skin="primary">
+                <input {{$item['status'] == 1?'checked':'' }} type="checkbox" name="status" title="禁用" lay-skin="primary">
             </div>
         </div>
         <div class="layui-form-item" style="padding-top: 20px;">
@@ -44,7 +45,7 @@
             $ = layui.jquery;
             form.on('submit(formDemo)', function(data) {
                 console.log(data);
-                $.post('/admins/admin/add', data.field, function(res) {
+                $.post('/admins/admin/edit', data.field, function(res) {
                     if (res.code > 0) {
                         return layer.alert(res.msg, {
                             icon: 2

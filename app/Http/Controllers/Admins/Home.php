@@ -12,7 +12,7 @@ class Home extends Controller
     public function index()
     {
         // 管理员信息
-        $data['admin'] = Auth::user();
+        $data['admin'] = request()->admin;
         $gid = $data['admin']->gid;
         $res = DB::table('admin_group')->where('id', $gid)->select('title', 'rights')->first();
         $res->rights = json_decode($res->rights, true);

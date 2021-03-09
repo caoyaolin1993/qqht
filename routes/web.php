@@ -12,9 +12,8 @@ Route::post('/admins/account/dologin','Admins\Account@dologin');
 Route::get('/admins/account/logout','Admins\Account@logout');
 
 Route::get('/admins/admin/indexdata','Admins\Admin@indexdata');
-Route::get('/admins/admin/add','Admins\Admin@add');
+
 Route::get('/admins/admin/save','Admins\Admin@save');
-Route::get('/admins/admin/del','Admins\Admin@del');
 
 // 后台相关
 Route::namespace('admins')->middleware(['auth','rights'])->group(function(){
@@ -22,6 +21,14 @@ Route::namespace('admins')->middleware(['auth','rights'])->group(function(){
     // 管理员相关路由
     Route::get('/admins/admin/index','Admin@index');
     Route::get('/admins/home/welcome','Home@welcome');
-    // 系统设置相关
-    Route::get('/admins/setting/index','Setting@index');
+    Route::get('/admins/admin/edit','Admin@edit');
+    Route::post('/admins/admin/edit','Admin@edit');
+    Route::get('/admins/admin/del','Admin@del');
+    Route::get('/admins/admin/detail','Admin@detail');
+    Route::get('/admins/admin/add','Admin@add');
+    Route::post('/admins/admin/add','Admin@add');
+    Route::get('/admins/admin/upstatus','Admin@upstatus');
+    // 菜单相关
+    Route::get('/admins/menus/index','Menus@index');
+    Route::get('/admins/menus/indexdata','Menus@indexdata');
 });

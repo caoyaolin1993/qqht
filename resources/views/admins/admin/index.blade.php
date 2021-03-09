@@ -15,10 +15,10 @@
     <div style="margin-left: 20px;margin-right: 20px;">
         <table id="demo" lay-filter="test"></table>
         <script type="text/html" id="toolbarDemo">
-            <div class="layui-btn-container"><button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button><button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button><button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button></div>
+            <div class="layui-btn-container"><button class="layui-btn layui-btn-sm" lay-event="ADD">增加</button><button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button><button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button><button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button></div>
         </script>
         <script type="text/html" id="switchTpl">
-            <input type="checkbox" name="sex" value="@{{d.status}}" lay-skin="switch" lay-text="正常|禁用" lay-filter="sexDemo" @{{ d.status == 0 ? 'checked' : '' }}>
+            <input type="checkbox" name="sex" value="@{{d.id}}" lay-skin="switch" lay-text="正常|禁用" lay-filter="sexDemo" @{{ d.status == 0 ? 'checked' : '' }}>
         </script>
         <script type="text/html" id="switchTpl1">
             @{{ d.add_time > 0 ? formatDateTime(d.add_time):''}}
@@ -41,81 +41,43 @@
                 page: false,
                 cols: [
                     [{
-                            fixed: 'left',
-                            type: 'checkbox',
-                            event: 'ch'
-                        }, {
-                            field: 'id',
-                            title: 'ID',
-                            width: 80,  
-                            sort: true,
-                            fixed: 'left',
-                        }, {
-                            field: 'username',
-                            title: '用户名'
-                        }, {
-                            field: 'realname',
-                            title: '真实姓名'
-                        }, {
-                            field: 'gid',
-                            title: '角色'
-                        }, {
-                            field: 'last_login',
-                            title: '最后登录时间',
-                            templet: '#switchTpl2'
-                        }, {
-                            field: 'add_time',
-                            title: '添加时间',
-                            templet: '#switchTpl1'
-                        }, {
-                            field: 'status',
-                            title: '状态',
-                            templet: '#switchTpl'
-                        }, {
-                            fixed: 'right',
-                            title: '操作',
-                            width: 180,
-                            align: 'center',
-                            toolbar: '#barDemo'
-                        }
-                        /* , {
-                            field: 'sex',
-                            title: '性别',
-                            sort: true,
-                            templet: '#switchTpl',
-                        }, {
-                            field: 'city',
-                            title: '城市'
-                        }, {
-                            field: 'sign',
-                            title: '签名',
-                            width: '20%'
-                        }, {
-                            field: 'experience',
-                            title: '积分',
-                            sort: true
-                        }, {
-                            field: 'score',
-                            title: '评分',
-                            sort: true
-                        }, {
-                            field: 'classify',
-                            title: '职业'
-                        }, {
-                            field: 'wealth',
-                            title: '财富',
-                            sort: true,
-                            edit: 'text',
-                            event: 'editcf',
-                            style: 'background-color: #5FB878; color: #fff;'
-                        }, {
-                            fixed: 'right',
-                            title: '操作',
-                            width: 180,
-                            align: 'center',
-                            toolbar: '#barDemo'
-                        } */
-                    ]
+                        fixed: 'left',
+                        type: 'checkbox',
+                        event: 'ch'
+                    }, {
+                        field: 'id',
+                        title: 'ID',
+                        width: 80,
+                        sort: true,
+                        fixed: 'left',
+                    }, {
+                        field: 'username',
+                        title: '用户名'
+                    }, {
+                        field: 'realname',
+                        title: '真实姓名'
+                    }, {
+                        field: 'gid',
+                        title: '角色'
+                    }, {
+                        field: 'last_login',
+                        title: '最后登录时间',
+                        templet: '#switchTpl2'
+                    }, {
+                        field: 'add_time',
+                        title: '添加时间',
+                        templet: '#switchTpl1'
+                    }, {
+                        field: 'status',
+                        title: '状态',
+                        templet: '#switchTpl'
+                    }, {
+                        fixed: 'right',
+                        title: '操作',
+                        width: 180,
+                        align: 'center',
+                        toolbar: '#barDemo'
+                    }]
                 ]
             });
             table.on('toolbar(test)', function(obj) {
@@ -135,6 +97,16 @@
                     case 'LAYTABLE_TIPS':
                         layer.alert('这是工具栏右侧自定义的一个图标按钮');
                         break;
+                    case 'ADD':
+                        layer.open({
+                            id: '',
+                            type: 2,
+                            title: '查看',
+                            anim: 1,
+                            area: ['800px', '430px'],
+                            content: '/admins/admin/add'
+                        });
+                        break;
                 };
             });
             table.on('edit(test)', function(obj) {
@@ -144,30 +116,63 @@
                 layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
             });
             form.on('switch(sexDemo)', function(obj) {
-                layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
+                console.log(obj);
+                var status = '';
+                if (obj.elem.checked == false) {
+                    status = 1;
+                } else {
+                    status = 0;
+                }
+
+                $.get('/admins/admin/upstatus', {
+                    id: obj.value,
+                    status: status
+                }, function(res) {
+                    if (res.code > 0) {
+                        return layer.alert(res.msg, {
+                            icon: 2
+                        });
+                    }
+                }, 'json');
+
             });
             table.on('tool(test)', function(obj) {
                 var data = obj.data;
                 var layEvent = obj.event;
                 var tr = obj.tr;
-                if (layEvent === 'detail') {} else if (layEvent === 'del') {
+                if (layEvent === 'detail') {
+                    layer.open({
+                        id: '',
+                        type: 2,
+                        title: '查看',
+                        anim: 1,
+                        area: ['800px', '430px'],
+                        content: '/admins/admin/detail?aid=' + data.id
+                    });
+                } else if (layEvent === 'del') {
                     console.log(obj);
                     layer.confirm('真的删除行么', function(index) {
-                        obj.del();
-                        layer.close(index);
+                        $.get('/admins/admin/del', {
+                            id: data.id
+                        }, function(res) {
+                            if (res.code > 0) {
+                                return layer.alert(res.msg, {
+                                    icon: 2
+                                });
+                            }
+                            obj.del();
+                            layer.close(index);
+                            layer.msg(res.msg);
+                        }, 'json');
                     });
                 } else if (layEvent === 'edit') {
                     layer.open({
                         id: '',
                         type: 2,
-                        title: '编辑',
+                        title: '修改管理员',
                         anim: 1,
-                        area: ['800px', '580px'],
-                        content: ['/admins/admin/add']
-                    });
-                    obj.update({
-                        username: '123',
-                        title: 'xxx'
+                        area: ['800px', '430px'],
+                        content: '/admins/admin/edit?aid=' + data.id
                     });
                 } else if (layEvent === 'LAYTABLE_TIPS') {
                     layer.alert('Hi，头部工具栏扩展的右侧图标。');
@@ -202,7 +207,7 @@
         });
 
         function formatDateTime(inputTime) {
-            var date = new Date(inputTime*1000);
+            var date = new Date(inputTime * 1000);
             var y = date.getFullYear();
             var m = date.getMonth() + 1;
             m = m < 10 ? ('0' + m) : m;

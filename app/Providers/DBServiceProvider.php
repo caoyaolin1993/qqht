@@ -15,7 +15,6 @@ class DBServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        
     }
 
     /**
@@ -36,5 +35,10 @@ class DBServiceProvider extends ServiceProvider
 
             return $result;
         });
+        QueryBuilder::macro('item', function () {
+            $res = $this->first();
+            return $res ? (array)$res : false;
+        });
+
     }
 }
