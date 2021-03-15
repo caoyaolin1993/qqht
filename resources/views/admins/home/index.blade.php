@@ -14,7 +14,7 @@
     <div class="layui-layout layui-layout-admin">
         <div class="layui-header">
             <div class="layui-logo">通用后台管理系统</div>
-            <!-- 头部区域（可配合layui已有的水平导航） -->
+          
             <ul class="layui-nav layui-layout-left">
                 <li class="layui-nav-item"><a href="">控制台</a></li>
                 <li class="layui-nav-item"><a href="">商品管理</a></li>
@@ -45,7 +45,7 @@
 
         <div class="layui-side layui-bg-black">
             <div class="layui-side-scroll">
-                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+               
                 <ul class="layui-nav layui-nav-tree">
                     @foreach($menus as $key => $menu)
                     <li class="layui-nav-item {{$key==0?'layui-nav-itemed':''}}">
@@ -62,19 +62,19 @@
                 </ul>
             </div>
         </div>
-        <!--  -->
+        
         <div class="layui-body">
-            <!-- 内容主体区域 -->
+         
             <iframe src="/admins/home/welcome" frameborder="0" style="width: 100%;height: calc(100% - 3px);"></iframe>
         </div>
 
         <div class="layui-footer">
-            <!-- 底部固定区域 -->
+        
             © layui.com - 底部固定区域
         </div>
     </div>
     <script>
-        //JavaScript代码区域
+     
         layui.use(['element','layer'], function() {
             var element = layui.element;
             $ = layui.jquery;

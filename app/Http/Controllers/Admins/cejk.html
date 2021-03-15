@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://www.layuicdn.com/layui/css/layui.css"
+        />
+        <script src="https://www.layuicdn.com/layui/layui.js"></script>
+    </head>
+    <body>
+        <div class="layui-btn-container">
+            <fieldset
+                class="layui-elem-field layui-field-title"
+                style="margin-top: 20px"
+            >
+                <legend>get 请求按钮</legend>
+            </fieldset>
+            <button
+                id="an1"
+                type="button"
+                class="layui-btn layui-btn-radius layui-btn-normal"
+                onclick="tjget(1)"
+            >
+                按钮一</button
+            ><button
+                id="an2"
+                type="button"
+                class="layui-btn layui-btn-radius layui-btn-normal"
+                onclick="tjget(2)"
+            >
+                按钮二</button
+            ><button
+                id="an3"
+                type="button"
+                class="layui-btn layui-btn-radius layui-btn-normal"
+                onclick="tjget(3)"
+            >
+                按钮三</button
+            ><button
+                id="an4"
+                type="button"
+                class="layui-btn layui-btn-radius layui-btn-normal"
+                onclick="tjget(4)"
+            >
+                按钮四</button
+            ><button
+                id="an5"
+                type="button"
+                class="layui-btn layui-btn-radius layui-btn-normal"
+                onclick="tjget(5)"
+            >
+                按钮五
+            </button>
+            <fieldset
+                class="layui-elem-field layui-field-title"
+                style="margin-top: 20px"
+            >
+                <legend>post 请求按钮</legend>
+            </fieldset>
+            <button
+                id="an6"
+                type="button"
+                class="layui-btn layui-btn-warm"
+                onclick="tjpost(1)"
+            >
+                按钮六</button
+            ><button
+                id="an7"
+                type="button"
+                class="layui-btn layui-btn-warm"
+                onclick="tjpost(2)"
+            >
+                按钮七</button
+            ><button
+                id="an8"
+                type="button"
+                class="layui-btn layui-btn-warm"
+                onclick="tjpost(3)"
+            >
+                按钮八</button
+            ><button
+                id="an9"
+                type="button"
+                class="layui-btn layui-btn-warm"
+                onclick="tjpost(4)"
+            >
+                按钮九</button
+            ><button
+                id="an10"
+                type="button"
+                class="layui-btn layui-btn-warm"
+                onclick="tjpost(5)"
+            >
+                按钮十
+            </button>
+        </div>
+    </body>
+    <script>
+        var geturl1 = "http://qqht.com/admins/role/setroledata";
+        var geturl2 = "//www.baidu.com";
+        var geturl3 = "";
+        var geturl4 = "";
+        var geturl5 = "";
+        var getdata1 = {
+            id: 1,
+        };
+        var getdata2 = {};
+        var getdata3 = {};
+        var getdata4 = {};
+        var getdata5 = {};
+        var posturl1 = "";
+        var posturl2 = "";
+        var posturl3 = "";
+        var posturl4 = "";
+        var posturl5 = "";
+        var postdata1 = {};
+        var postdata2 = {};
+        var postdata3 = {};
+        var postdata4 = {};
+        var postdata5 = {};
+        var geturl = {
+            a: geturl1,
+            b: geturl2,
+            c: geturl3,
+            d: geturl4,
+            e: geturl5,
+        };
+        var getdata = {
+            a: getdata1,
+            b: getdata2,
+            c: getdata3,
+            d: getdata4,
+            e: getdata5,
+        };
+        $(function () {
+            $("#an1").text(geturl.a);
+            $("#an2").text(geturl.b);
+            $("#an3").text(geturl.c);
+            $("#an4").text(geturl.d);
+            $("#an5").text(geturl.e);
+        });
+        function tjget(value) {
+            switch (value) {
+                case 1:
+                    $.get(geturl.a, getdata.a, function (res) {console.log(res);}, "json");
+                    break;
+                case 2:
+                    $.get(geturl.b, getdata.b, function (res) {}, "json");
+                    break;
+                case 3:
+                    $.get(geturl.c, getdata.c, function (res) {}, "json");
+                    break;
+                case 4:
+                    $.get(geturl.d, getdata.d, function (res) {}, "json");
+                    break;
+                case 5:
+                    $.get(geturl.e, getdata.e, function (res) {}, "json");
+                    break;
+            }
+        }
+        var posturl = {
+            a: posturl1,
+            b: posturl2,
+            c: posturl3,
+            d: posturl4,
+            e: posturl5,
+        };
+        var postdata = {
+            a: postdata1,
+            b: postdata2,
+            c: postdata3,
+            d: postdata4,
+            e: postdata5,
+        };
+        $(function () {
+            $("#an6").text(posturl.a);
+            $("#an7").text(posturl.b);
+            $("#an8").text(posturl.c);
+            $("#an9").text(posturl.d);
+            $("#an10").text(posturl.e);
+        });
+        function tjpost(value) {
+            switch (value) {
+                case 1:
+                    $.post(posturl.a, postdata.a, function (res) {}, "json");
+                    break;
+                case 2:
+                    $.post(posturl.b, postdata.b, function (res) {}, "json");
+                    break;
+                case 3:
+                    $.post(posturl.c, postdata.c, function (res) {}, "json");
+                    break;
+                case 4:
+                    $.post(posturl.d, postdata.d, function (res) {}, "json");
+                    break;
+                case 5:
+                    $.post(posturl.e, postdata.e, function (res) {}, "json");
+                    break;
+            }
+        }
+    </script>
+</html>
